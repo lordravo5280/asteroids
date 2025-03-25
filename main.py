@@ -39,6 +39,14 @@ def main():
                 print("Game over!")
                 pygame.quit()
                 sys.exit()
+        for asteroid in asteroids:
+            for bullet in shots:
+                distance = ((asteroid.position[0] - bullet.position[0]) ** 2 + 
+                    (asteroid.position[1] - bullet.position[1]) ** 2) ** 0.5
+                if distance < (asteroid.radius + bullet.radius):
+                    asteroid.split(asteroids)
+                    bullet.kill()
+            
         pygame.display.flip()
 
         dt = clock.tick(60) / 1000
